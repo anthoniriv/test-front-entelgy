@@ -33,7 +33,6 @@ async function obtenerPaises() {
 function renderWebComponent(data) {
   const container = document.getElementById("web-component-container");
   data.forEach((item) => {
-    console.log('Pais', item)
     const webComponent = document.createElement("country-card");
     webComponent.setAttribute("name", item.name);
     webComponent.setAttribute("url", item.flag);    
@@ -42,5 +41,7 @@ function renderWebComponent(data) {
     container.appendChild(webComponent);
   });
 }
+
+
 
 window.addEventListener("load", main);

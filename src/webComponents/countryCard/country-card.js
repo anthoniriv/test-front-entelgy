@@ -6,8 +6,26 @@ class CountryCard extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.addEventListener("click", this.openModal);
   }
 
+  openModal() {
+    // create the modal element and add it to the shadow root
+    const modal = document.createElement("div");
+    modal.innerHTML = `
+      <div class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Datos interesantes</h2>
+        <p>Nombre: ${name}</p>
+        <p>Capital: ${capital}</p>
+        <p>Población: ${poblacion}</p>
+      </div>
+      </div>
+    `;
+    this.shadowRoot.appendChild(modal);
+  }
+  
   render() {
     const name = this.getAttribute("name");
     const url = this.getAttribute("url");
@@ -30,7 +48,6 @@ class CountryCard extends HTMLElement {
       
       .card-header {
         width: 100%;
-        color: #fff;
         padding: 10px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -68,16 +85,36 @@ class CountryCard extends HTMLElement {
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
       }
       </style>
+      <head>
+      <link rel="stylesheet" type="text/css" href="../countryCard/country-card.css" />
+      </head>
       <div class="card">
         <div class="card-header">
           <img class="card-flag" src=${url}></img>
-          <a href="" class="card-title">${name}</a>
+          <a id="modal-link" class="card-title">${name}</a>
         </div>
         <div class="card-body">
           <p class="card-text">Capital: ${capital}</p>
           <p class="card-text">Poblacion: ${poblacion}</p>
         </div>
       </div>
+      <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <span id="close-modal" class="close-modal">&times;</span>
+          <p>Información adicional sobre el país</p>
+        </div>
+      </div>
+      <script>
+        const modalLink = this.shadowRoot.querySelector("#modal-link");
+        const modal = this.shadowRoot.querySelector("#modal");
+        const closeModal = this.shadowRoot.querySelector("#close-modal");
+        modalLink.addEventListener("click", () => {
+          modal.style.display = "block";
+        });
+        closeModal.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+      </script>
     `;
   }
 }

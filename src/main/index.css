@@ -1,3 +1,7 @@
+* {
+  font-family: "Rubik", sans-serif;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -23,8 +27,8 @@ footer {
   text-align: center;
 }
 
-.content{
-    padding: 3rem;
+.content {
+  padding: 3rem;
 }
 
 #web-component-container {
