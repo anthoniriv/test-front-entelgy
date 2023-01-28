@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #1b497a; /* azul oscuro */
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+footer {
+  background-color: #272727;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+.content{
+    padding: 3rem;
+}
+
+#web-component-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 20px;
+}
