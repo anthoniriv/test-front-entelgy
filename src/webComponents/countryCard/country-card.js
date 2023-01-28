@@ -10,22 +10,65 @@ class CountryCard extends HTMLElement {
   }
 
   openModal() {
-    // create the modal element and add it to the shadow root
+    const name = this.getAttribute("name");
+    const capital = this.getAttribute("capital");
+    const poblacion = this.getAttribute("poblacion");
     const modal = document.createElement("div");
     modal.innerHTML = `
+      <style>
+      .modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        .close {
+        position: absolute;
+        right: 1rem;
+        top: 0.5rem;
+        font-size: 2rem;
+        font-weight: bold;
+        color: grey;
+        cursor: pointer;
+        }
+        .close-button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: blue;
+        color: white;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        }
+      </style>
       <div class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Datos interesantes</h2>
-        <p>Nombre: ${name}</p>
-        <p>Capital: ${capital}</p>
-        <p>Población: ${poblacion}</p>
-      </div>
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Datos interesantes</h2>
+          <p>Nombre: ${name}</p>
+          <p>Capital: ${capital}</p>
+          <p>Población: ${poblacion}</p>
+        </div>
       </div>
     `;
     this.shadowRoot.appendChild(modal);
   }
-  
+
   render() {
     const name = this.getAttribute("name");
     const url = this.getAttribute("url");
@@ -85,9 +128,6 @@ class CountryCard extends HTMLElement {
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
       }
       </style>
-      <head>
-      <link rel="stylesheet" type="text/css" href="../countryCard/country-card.css" />
-      </head>
       <div class="card">
         <div class="card-header">
           <img class="card-flag" src=${url}></img>
@@ -105,15 +145,6 @@ class CountryCard extends HTMLElement {
         </div>
       </div>
       <script>
-        const modalLink = this.shadowRoot.querySelector("#modal-link");
-        const modal = this.shadowRoot.querySelector("#modal");
-        const closeModal = this.shadowRoot.querySelector("#close-modal");
-        modalLink.addEventListener("click", () => {
-          modal.style.display = "block";
-        });
-        closeModal.addEventListener("click", () => {
-          modal.style.display = "none";
-        });
       </script>
     `;
   }
